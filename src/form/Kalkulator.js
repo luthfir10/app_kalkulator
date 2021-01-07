@@ -16,17 +16,35 @@ class Kalkulator extends Component {
       operator: ["+", "-", "*", "/"],
       total: 0,
     };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ num1: event.target.value });
-    this.setState({ num2: event.target.num2 });
-    this.setState({ num3: event.target.num3 });
   }
 
   OperatorClick = (operator) => {
-    console.log(operator);
+    var ni1 = parseInt(this.state.num1);
+    var ni2 = parseInt(this.state.num2);
+    var ni3 = parseInt(this.state.num3);
+    var hasil;
+    switch (operator) {
+      case "+":
+        hasil = ni1 + ni2 + ni3;
+        break;
+      case "-":
+        hasil = ni1 - ni2 - ni3;
+        break;
+      case "*":
+        hasil = ni1 * ni2 * ni3;
+        break;
+      case "/":
+        hasil = ni1 / ni2 / ni3;
+        break;
+      default:
+    }
+    this.setState({
+      num1: ni1,
+      num2: ni2,
+      num3: ni3,
+      total: hasil,
+    });
+    // this.state.total = state.num1 this.state.operator
   };
 
   render() {
@@ -46,8 +64,7 @@ class Kalkulator extends Component {
                   size="lg"
                   type="text"
                   placeholder="Input Angka 1"
-                  value={this.state.num1}
-                  onChange={this.handleChange}
+                  onChange={(e) => (this.state.num1 = e.target.value)}
                 />
               </Col>
               <Col xs={2}>
@@ -65,8 +82,7 @@ class Kalkulator extends Component {
                   size="lg"
                   type="text"
                   placeholder="Input Angka 2"
-                  value={this.state.num2}
-                  onChange={this.handleChange}
+                  onChange={(e) => (this.state.num2 = e.target.value)}
                 />
               </Col>
               <Col xs={2}>
@@ -84,8 +100,7 @@ class Kalkulator extends Component {
                   size="lg"
                   type="text"
                   placeholder="Input Angka 3"
-                  value={this.state.num3}
-                  onChange={this.handleChange}
+                  onChange={(e) => (this.state.num3 = e.target.value)}
                 />
               </Col>
               <Col xs={2}>
@@ -103,7 +118,7 @@ class Kalkulator extends Component {
                   <Col xs={3}>
                     <Button
                       key={index}
-                      onClick={() => this.OperatorClick(this.state)}
+                      onClick={() => this.OperatorClick(operator)}
                       variant="outline-primary"
                       size="lg"
                     >
